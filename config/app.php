@@ -179,6 +179,11 @@ return [
 
     ],
 
+    'local_providers' => [
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Class Aliases

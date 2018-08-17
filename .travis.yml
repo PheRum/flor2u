@@ -1,0 +1,27 @@
+language: php
+
+php:
+  - 7.2
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE laravel CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
+
+
+before_script:
+  - composer self-update
+  - composer install --no-interaction
+  - chmod -R 777 storage/
+  - chmod -R 777 bootstrap/cache/
+  - cp .env.travis.example .env
+  - sudo apt-get install -y nodejs
+  - npm install --global yarn
+  - yarn
+  - npm run production
+  - php artisan cache:clear
+  - php artisan migrate:fresh --seed
+
+script:
+  - vendor/bin/phpunit
