@@ -41,6 +41,7 @@
                 <ul class="nav navbar-nav">
                     <li>{{ Html::link(route('order.index'), 'Orders') }}</li>
                     <li>{{ Html::link(route('product.index'), 'Products') }}</li>
+                    <li>{{ Html::link(route('weather.index'), 'Weather') }}</li>
                 </ul>
             </div>
         </div>

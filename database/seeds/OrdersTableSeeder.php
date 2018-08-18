@@ -1,5 +1,7 @@
 <?php
 
+use App\Order;
+use App\Product;
 use Illuminate\Database\Seeder;
 
 class OrdersTableSeeder extends Seeder
@@ -11,22 +13,15 @@ class OrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
+        $products = Product::all();
 
-        $limit = 1000;
-        $status = [0, 10, 20];
+        factory(Order::class, 1000)->create()->each(function (Order $order) use ($products) {
+            $ids = $products->random(random_int(1, 3))->pluck('id')->toArray();
 
-        for ($i = 0; $i < $limit; $i++) {
-            $createdAt = \Carbon\Carbon::now()->subDays(rand(0, 4));
-            \DB::table('orders')->insert([				
-				'status' => $status[rand(0,2)],
-				'client_email' => $faker->email,
-                'partner_id' => $faker->numberBetween(1, 20),
-                'delivery_dt' => $createdAt->copy()->addHours(rand(6,50)),
-                'created_at' => $createdAt,
-                'updated_at' => $createdAt->copy()->addHours(rand(1,5)),
+            /** @var Product $products */
+            $order->products()->attach($ids, [
+                'quantity' => random_int(1, 3),
             ]);
-        }
+        }, 300);
     }
 }
-
