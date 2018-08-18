@@ -49,7 +49,6 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'order_products')->withPivot([
-            'price',
             'quantity',
         ]);
     }
@@ -71,7 +70,7 @@ class Order extends Model
         $products = $this->products;
 
         foreach ($products as $product) {
-            $total += $product->pivot->quantity * $product->pivot->price;
+            $total += $product->pivot->quantity * $product->price;
         }
 
         return $total;

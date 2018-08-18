@@ -25,3 +25,10 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('{id}', 'ProductController@show')->name('product.show');
     Route::put('{id}', 'ProductController@update')->name('product.update');
 });
+
+/**
+ * Weather
+ */
+Route::group(['prefix' => 'weather'], function () {
+    Route::get('/', 'WeatherController@index')->name('weather.index');
+});

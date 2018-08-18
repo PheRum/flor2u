@@ -35,4 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'yandex-weather' => [
+        'secret' => env('YANDEX_WEATHER_SECRET', 'cb94cb47-9d65-4a99-9545-f747fa445b74'),
+    ],
+
 ];
